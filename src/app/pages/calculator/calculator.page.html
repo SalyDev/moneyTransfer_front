@@ -1,0 +1,16 @@
+<app-header [name]="nom" [title]="titre"></app-header>
+<ion-content> 
+  <form class="ion-margin-horizontal">
+    <ion-item lines="full">
+      <ion-label position="floating">Type de transaction</ion-label>
+      <ion-input type="text" required></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">montant</ion-label>
+      <ion-input type="text" required></ion-input>
+    </ion-item>
+    <div class="ion-float-right">
+    <ion-button (click)="onSubmit()" mode="ios" shape="round" type="submit" color="secondary" size="small" class="login_btn">Se connecter</ion-button>
+    </div>
+  </form>
+</ion-content>

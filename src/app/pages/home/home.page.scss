@@ -1,0 +1,35 @@
+ion-toolbar{
+    --opacity: 0;
+}
+.divLogo{
+    width: 80%; 
+    height: 30px;
+}
+.image_logo{
+    height: 100%;
+}
+.div_avatar{
+    width: 46%; 
+    height: 100%; 
+    border: 1px solid red; 
+    border-radius: 50%;
+}
+.style_card_2{
+    font-size: 20px;
+    color: #51BFD0;
+}
+.style_card_1{
+    font-weight: bold;
+    font-size: 11px;
+    color: #666666;
+}
+.card_mont{
+    border-bottom: 1px solid #51BFD0;
+}
+ion-card-content ion-grid ion-row{
+    border-bottom: 0.5px solid #F24824;
+    margin-bottom: 20px;
+}
+ion-content ion-card{
+    box-shadow: none !important;
+}

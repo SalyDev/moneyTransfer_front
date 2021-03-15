@@ -1,0 +1,7 @@
+{
+  "name": "moneyTransfer_front",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

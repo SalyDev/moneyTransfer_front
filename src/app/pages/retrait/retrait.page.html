@@ -1,0 +1,87 @@
+<app-header [name]="nom" [title]="titre"></app-header>
+<ion-content> 
+  <ion-item lines="inset">
+    <ion-label position="floating">Code</ion-label>
+    <ion-input type="text" required></ion-input>
+  </ion-item>
+  <ion-card class="card_toggler">
+    <ion-card-content>
+        <ion-grid>
+          <ion-row>
+            <ion-col class="center-any-object" style="cursor: pointer;" (click)="showReceiver()" [ngClass]="{'is_actif':isShowReceiver}">Bénéficiaire</ion-col>
+            <ion-col class="center-any-object" style="cursor: pointer;" (click)="showEmetter()" [ngClass]="{'is_actif':!isShowReceiver}">Emetteur</ion-col>
+          </ion-row>
+        </ion-grid>
+    </ion-card-content>
+  </ion-card>
+  <!-- cette section doit apparaitre si seulement le code tapé en haut est correct -->
+  <div class="ion-margin-horizontal">
+    <div *ngIf="isShowReceiver; else showEmetterSection">
+  <form>
+    <ion-item lines="inset">
+      <ion-label position="floating">N. CNI</ion-label>
+      <ion-input type="text" required></ion-input>
+    </ion-item>
+  </form>
+  <div class="ion-margin-horizontal">
+    <div class="ion-margin-top">
+      <ion-label>
+          <p>NOM & PRENOM</p>
+      </ion-label>  
+      <div>Receiver_name</div>
+    </div>
+    <div class="ion-margin-top">
+      <ion-label>
+          <p>MONTANT A RECEVOIR</p>
+      </ion-label>  
+      <div>Receiver_mount</div>
+    </div>
+    <div class="ion-margin-vertical">
+      <ion-label>
+          <p>TÉLÉPHONE</p>
+      </ion-label>  
+      <div>Receiver_tel</div>
+    </div>
+  </div>
+</div>
+
+  <ng-template #showEmetterSection>
+    <div class="ion-margin-horizontal">
+      <div class="ion-margin-top">
+        <ion-label>
+            <p>N. CNI</p>
+        </ion-label>  
+        <div>emetter_vni</div>
+      </div>
+      <div class="ion-margin-top">
+        <ion-label>
+            <p>NOM & PRENOM</p>
+        </ion-label>  
+        <div>emetter_nom</div>
+      </div>
+      <div class="ion-margin-vertical">
+        <ion-label>
+            <p>MONTANT ENVOYÉ</p>
+        </ion-label>  
+        <div>montant_envoyé</div>
+      </div>
+      <div class="ion-margin-vertical">
+        <ion-label>
+            <p>TÉLÉPHONE</p>
+        </ion-label>  
+        <div>emetter_tel</div>
+      </div>
+      <div class="ion-margin-vertical">
+        <ion-label>
+            <p>DATE D'ENVOIE</p>
+        </ion-label>  
+        <div>date_envoie</div>
+      </div>
+    </div>
+  </ng-template>
+  <div class="ion-margin-horizontal">
+    <ion-button (click)="onSubmit()" mode="ios" type="submit" color="secondary" expand="block">Retirer</ion-button>
+  </div>
+
+</div>
+</ion-content>

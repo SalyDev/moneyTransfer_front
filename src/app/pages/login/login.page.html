@@ -1,0 +1,33 @@
+<ion-header mode="ios">
+  <ion-card class="ion-no-margin loginCard">
+    <ion-card-header>
+      <div class="img_logo">
+        <ion-img src="../assets/images/logo.jpg"></ion-img>
+      </div>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="ion-text-center">Login</div>
+    </ion-card-content>
+  </ion-card>
+</ion-header>
+<div class="login_line"></div>
+<ion-content>
+  <form>
+    <ion-item lines="full">
+      <ion-label position="floating">Téléphone</ion-label>
+      <ion-input type="text" required></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">Password</ion-label>
+      <ion-input type="password" required></ion-input>
+    </ion-item>
+    <ion-row>
+      <ion-col>
+        <div class="ion-margin-top">
+          <a [routerLink]="['/forgot-password']" class="small-text">Mot de passe oublié?</a>
+        </div>
+        <ion-button (click)="onSubmit()" mode="ios" type="submit" color="primary" expand="block" class="login_btn">Se connecter</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

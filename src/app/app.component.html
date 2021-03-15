@@ -1,0 +1,48 @@
+<ion-app>
+  <ion-menu side="start" menuId="main-menu" content-id="main">
+    <ion-header>
+      <ion-toolbar translucent>
+        <ion-title></ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="custom">
+      <ion-list>
+        <ion-menu-toggle>
+        <ion-item routerLink="tabs/home">
+          <ion-icon class="custom-icon" name="home" slot="start"></ion-icon>
+          <ion-label>Home</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+      <ion-menu-toggle>
+        <ion-item routerLink="tabs/transaction">
+          <ion-icon name="time-outline" slot="start"></ion-icon>
+          <ion-label>Transactions</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+      <ion-menu-toggle>
+        <ion-item routerLink="tabs/commission">
+          <ion-icon name="podium-outline" slot="start"></ion-icon>
+          <ion-label>Commissions</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+      <ion-menu-toggle>
+        <ion-item routerLink="tabs/calculator">
+          <ion-icon name="calculator-outline" slot="start"></ion-icon>
+          <ion-label>Calculateur</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+      </ion-list>
+    </ion-content>
+    <!-- <ion-footer>
+      <ion-toolbar padding>
+           <ion-buttons left>
+          <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+          </button>      
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-footer> -->
+  </ion-menu>
+
+  <ion-router-outlet id="main"></ion-router-outlet>
+</ion-app>

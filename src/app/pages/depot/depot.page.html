@@ -1,0 +1,70 @@
+<app-header [name]="nom" [title]="titre"></app-header>
+<ion-content> 
+  <ion-card class="card_toggler">
+    <ion-card-content >
+        <ion-grid>
+          <ion-row class="ion-justify-content-center">
+            <ion-col class="center-any-object" style="cursor: pointer;" (click)="showEmetter()" [ngClass]="{'is_actif':isShowEmetter}">Emetteur</ion-col>
+            <ion-col class="center-any-object" style="cursor: pointer;" (click)="showReceiver()" [ngClass]="{'is_actif':!isShowEmetter}">Bénéficiaire</ion-col>
+          </ion-row>
+        </ion-grid>
+    </ion-card-content>
+  </ion-card>
+  <div *ngIf="isShowEmetter; else showReceiverSection">
+  <form class="ion-margin-horizontal">
+    <ion-item lines="inset">
+      <ion-label position="floating">N. CNI</ion-label>
+      <ion-input type="text" required></ion-input>
+    </ion-item>
+    <ion-item lines="inset">
+      <ion-label position="floating">Nom</ion-label>
+      <ion-input type="text" required></ion-input>
+    </ion-item>
+    <ion-item lines="inset">
+      <ion-label position="floating">Prénom</ion-label>
+      <ion-input type="text" required></ion-input>
+    </ion-item>
+    <ion-item lines="inset">
+      <ion-label position="floating">Téléphone</ion-label>
+      <ion-input type="text" required></ion-input>
+    </ion-item>
+    <ion-item lines="inset">
+      <ion-label position="floating">Montant</ion-label>
+      <ion-input type="text" required></ion-input>
+    </ion-item>
+    <ion-item lines="inset" class="item_frais ion-float-right">
+      <ion-label position="floating">Frais</ion-label>
+      <ion-input type="text" color="secondary" required></ion-input>
+    </ion-item>
+    <ion-item lines="inset" class="item_total">
+      <ion-label position="floating">Total</ion-label>
+      <ion-input type="text"connecter required></ion-input>
+    </ion-item>
+    <div class="center-any-object">
+      <ion-button (click)="showReceiver()" mode="ios" type="submit" color="secondary" expand="block" class="next_btn">Suivant</ion-button>
+    </div>
+  </form>
+</div>
+
+    <ng-template #showReceiverSection>
+      <form class="ion-margin-horizontal">
+        <ion-item lines="inset">
+          <ion-label position="floating">Prénom</ion-label>
+          <ion-input type="text" required></ion-input>
+        </ion-item>
+        <ion-item lines="inset">
+          <ion-label position="floating">Nom</ion-label>
+          <ion-input type="text" required></ion-input>
+        </ion-item>
+        <ion-item lines="inset">
+          <ion-label position="floating">Téléphone</ion-label>
+          <ion-input type="text" required></ion-input>
+        </ion-item>
+        <div class="center-any-object">
+          <ion-button mode="ios" (click)="onSubmit()" type="submit" color="secondary" expand="block" class="next_btn">Déposer</ion-button>
+        </div>
+      </form>
+    </ng-template>
+
+   
+</ion-content>

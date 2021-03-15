@@ -1,0 +1,122 @@
+<ion-header mode="ios">
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <div>
+            <ion-menu-button
+              color="primary"
+              slot="start"
+              menu="main-menu"
+            ></ion-menu-button>
+          </div>
+        </ion-col>
+        <ion-col class="ion-align-self-center center-any-object">
+          <div class="divLogo">
+            <ion-img
+              src="../assets/images/logo.jpg"
+              class="image_logo"
+            ></ion-img>
+          </div>
+        </ion-col>
+        <ion-col class="ion-align-self-center center-any-object">
+          <div class="div_avatar">img</div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-card class="card_mont">
+      <ion-card-content>
+        <div class="style_card_1">Mon solde disponible</div>
+        <div class="style_card_2">
+          <span [ngClass]="{'ion-hide':showMount}">
+            200 000 <span class="style_card_1">fcfa</span></span
+          ><ion-icon
+            [name]="toggleIcon"
+            (click)="toggleText()"
+            class="ion-float-right"
+          ></ion-icon>
+        </div>
+        <div [ngClass]="{'ion-hide':showMount}" class="style_card_1">
+          Dernier mise à jour
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- <page-login></page-login> -->
+  <ion-card class="ion-no-margin card-content">
+    <!-- <ion-card-header>
+      <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+      <ion-card-title>Card Title</ion-card-title>
+    </ion-card-header> -->
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <a routerLink="/depot">
+            <ion-icon color="secondary" name="arrow-redo"></ion-icon>
+            <span class="ion-margin-start">Dépot</span>
+            <ion-icon color="secondary" name="chevron-forward" class="ion-float-right"></ion-icon>
+          </a>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <a routerLink="/retrait">
+            <ion-icon color="secondary" name="arrow-undo"></ion-icon>
+            <span class="ion-margin-start">Refrait</span>
+            <ion-icon color="secondary" name="chevron-forward" class="ion-float-right"></ion-icon>
+          </a>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <a routerLink="/tabs/transaction">
+            <ion-icon color="secondary" name="repeat"></ion-icon>
+            <span class="ion-margin-start">Mes transactions</span>
+            <ion-icon color="secondary" name="chevron-forward" class="ion-float-right"></ion-icon>
+          </a>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <a routerLink="/tabs/transaction">
+            <ion-icon color="secondary" name="analytics"></ion-icon>
+            <span class="ion-margin-start">Toutes les transactions</span>
+            <ion-icon color="secondary" name="chevron-forward" class="ion-float-right"></ion-icon>
+          </a>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <a routerLink="/tabs/commission">
+            <ion-icon color="secondary" name="wallet"></ion-icon>
+            <span class="ion-margin-start">Mes commissions</span>
+            <ion-icon color="secondary" name="chevron-forward" class="ion-float-right"></ion-icon>
+          </a>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <a routerLink="/tabs/calculator">
+            <ion-icon color="secondary" name="calculator"></ion-icon>
+            <span class="ion-margin-start">Calculateur de frais</span>
+            <ion-icon color="secondary" name="chevron-forward" class="ion-float-right"></ion-icon>
+          </a>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <a routerLink="">
+            <ion-icon color="secondary" name="log-out"></ion-icon>
+            <span class="ion-margin-start">Déconnexion</span>
+            <ion-icon color="secondary" name="chevron-forward" class="ion-float-right"></ion-icon>
+          </a>
+          </ion-col>
+        </ion-row>
+        </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
