@@ -72,6 +72,7 @@ a{
     }
     .customText{
         font-size: 18px;
+        font-weight: bold;
     }
 }
 .is_actif{
@@ -80,6 +81,11 @@ a{
 .card_toggler{
     border-radius: 25px;
 }
-
-
+.custom_toast{
+    text-align: center;
+}
+.errorMsg{
+    font-size: 11px;
+    color: #eb445a;
+}
 

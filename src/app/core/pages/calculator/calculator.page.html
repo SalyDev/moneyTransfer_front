@@ -1,12 +1,14 @@
 <app-header [name]="nom" [title]="titre"></app-header>
 <ion-content> 
-  <form class="ion-margin-horizontal">
+  <form class="ion-margin">
+    <!-- <div class="ion-margin-start">
+      <ion-label>
+      <p>Type de transaction</p>
+    </ion-label>
+      <div>Dépôt</div>
+    </div> -->
     <ion-item lines="full">
-      <ion-label position="floating">Type de transaction</ion-label>
-      <ion-input type="text" required></ion-input>
-    </ion-item>
-    <ion-item lines="full">
-      <ion-label position="floating">montant</ion-label>
+      <ion-label position="floating"><p>montant</p></ion-label>
       <ion-input type="text" required></ion-input>
     </ion-item>
     <div class="ion-float-right">

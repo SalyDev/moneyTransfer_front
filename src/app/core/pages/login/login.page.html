@@ -12,21 +12,22 @@
 </ion-header>
 <div class="login_line"></div>
 <ion-content>
-  <form>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmitForm()">
     <ion-item lines="full">
       <ion-label position="floating">Téléphone</ion-label>
-      <ion-input type="text" required></ion-input>
+      <ion-input type="text" formControlName="telephone"></ion-input>
     </ion-item>
     <ion-item lines="full">
       <ion-label position="floating">Password</ion-label>
-      <ion-input type="password" required></ion-input>
+      <ion-input [type]="inputType" formControlName="password"></ion-input>
+      <ion-icon color="primary" [name]="iconName" (click)="iconToggler()" slot="end" class="ion-align-self-end"></ion-icon>
     </ion-item>
     <ion-row>
       <ion-col>
         <div class="ion-margin-top">
           <a [routerLink]="['/forgot-password']" class="small-text">Mot de passe oublié?</a>
         </div>
-        <ion-button (click)="onSubmit()" mode="ios" type="submit" color="primary" expand="block" class="login_btn">Se connecter</ion-button>
+        <ion-button mode="ios" type="submit" color="primary" expand="block" class="login_btn" [disabled]="!loginForm.valid">Se connecter</ion-button>
       </ion-col>
     </ion-row>
   </form>

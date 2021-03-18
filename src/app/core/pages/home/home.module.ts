@@ -8,6 +8,8 @@ import { HomePageRoutingModule } from './home-routing.module';
 
 import { HomePage } from './home.page';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { PipesModule } from 'src/app/core/pipes/pipes.module';
+// import { IonicStorageModule } from '@ionic/storage-angular';
 
 @NgModule({
   imports: [
@@ -15,7 +17,9 @@ import { SharedModule } from 'src/app/shared/shared.module';
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
-    SharedModule
+    SharedModule,
+    PipesModule,
+    // IonicStorageModule.forRoot()
   ],
   declarations: [HomePage]
 })

@@ -20,7 +20,10 @@
           </div>
         </ion-col>
         <ion-col class="ion-align-self-center center-any-object">
-          <div class="div_avatar">img</div>
+          <!-- <div class="div_avatar">img</div> -->
+          <ion-avatar class="ion-margin-start">
+            <img src="{{ 'data:image/jpg;base64,' + avatar }}" />
+          </ion-avatar>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -28,15 +31,15 @@
       <ion-card-content>
         <div class="style_card_1">Mon solde disponible</div>
         <div class="style_card_2">
-          <span [ngClass]="{'ion-hide':showMount}">
-            200 000 <span class="style_card_1">fcfa</span></span
+          <span [ngClass]="{'ion-hide':!showMount}">
+            {{solde | formatNumber}} <span class="style_card_1">fcfa</span></span
           ><ion-icon
             [name]="toggleIcon"
             (click)="toggleText()"
             class="ion-float-right"
           ></ion-icon>
         </div>
-        <div [ngClass]="{'ion-hide':showMount}" class="style_card_1">
+        <div [ngClass]="{'ion-hide':!showMount}" class="style_card_1">
           Dernier mise à jour
         </div>
       </ion-card-content>

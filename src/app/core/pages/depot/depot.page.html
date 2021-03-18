@@ -1,0 +1,115 @@
+<app-header [name]="nom" [title]="titre"></app-header>
+<ion-content>
+  <ion-card class="card_toggler">
+    <ion-card-content>
+      <ion-grid>
+        <ion-row class="ion-justify-content-center">
+          <ion-col
+            class="center-any-object"
+            style="cursor: pointer"
+            (click)="showEmetter()"
+            [ngClass]="{'is_actif':isShowEmetter}"
+            >Emetteur</ion-col
+          >
+          <ion-col
+            class="center-any-object"
+            style="cursor: pointer"
+            (click)="showReceiver()"
+            [ngClass]="{'is_actif':!isShowEmetter}"
+            >Bénéficiaire</ion-col
+          >
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+  <form
+    class="ion-margin-horizontal"
+    [formGroup]="depotForm"
+    (ngSubmit)="onSubmit()"
+  >
+    <div *ngIf="isShowEmetter; else showEmitterSection">
+      <ion-item lines="inset">
+        <ion-label position="floating">N. CNI</ion-label>
+        <ion-input type="text" formControlName="emetterCni" (keyup)="findClient()"></ion-input>
+      </ion-item>
+      <ion-text class="errorMsg ion-margin-start" *ngIf="depotForm.controls.emetterCni.touched && depotForm.controls.emetterCni.errors && depotForm.controls.emetterCni.errors.required">*Champs obligatoire</ion-text>
+      <ion-item lines="inset">
+        <ion-label position="floating">Nom</ion-label>
+        <ion-input type="text" formControlName="emetterNom"></ion-input>
+      </ion-item>
+      <ion-text class="errorMsg ion-margin-start" *ngIf="depotForm.controls.emetterNom.touched && depotForm.controls.emetterNom.errors && depotForm.controls.emetterNom.errors.required">*Champs obligatoire</ion-text>
+      <ion-item lines="inset">
+        <ion-label position="floating">Prénom</ion-label>
+        <ion-input type="text" formControlName="emetterPrenom"></ion-input>
+      </ion-item>
+      <ion-text class="errorMsg ion-margin-start" *ngIf="depotForm.controls.emetterPrenom.touched && depotForm.controls.emetterPrenom.errors && depotForm.controls.emetterPrenom.errors.required">*Champs obligatoire</ion-text>
+      <ion-item lines="inset">
+        <ion-label position="floating">Téléphone</ion-label>
+        <ion-input
+          type="text"
+          formControlName="emetterTelephone"
+        ></ion-input>
+      </ion-item>
+      <ion-text class="errorMsg ion-margin-start" *ngIf="depotForm.controls.emetterTelephone.touched && depotForm.controls.emetterTelephone.errors && depotForm.controls.emetterTelephone.errors.required">*Champs obligatoire</ion-text>
+      <ion-item lines="inset">
+        <ion-label position="floating">Montant</ion-label>
+        <ion-input type="text" formControlName="montant" type="text" (keyup)="setTotal()"></ion-input>
+      </ion-item>
+      <ion-text class="errorMsg ion-margin-start" *ngIf="depotForm.controls.montant.touched && depotForm.controls.montant.errors && depotForm.controls.montant.errors.required">*Champs obligatoire</ion-text>
+      <div class="item_frais ion-float-right">
+      <ion-item lines="inset">
+        <ion-label position="floating" type="text">Frais</ion-label>
+        <ion-input
+          type="text"
+          color="secondary"
+          formControlName="frais" (keyup)="setTotal()"
+        ></ion-input>
+      </ion-item>
+      <ion-text class="errorMsg ion-margin-start" *ngIf="depotForm.controls.frais.touched && depotForm.controls.frais.errors && depotForm.controls.frais.errors.required">*Champs obligatoire</ion-text>
+    </div>
+      <ion-item lines="inset" class="item_total">
+        <ion-label position="floating">Total</ion-label>
+        <ion-input type="text" connecter formControlName="total"></ion-input>
+      </ion-item>
+      <div class="center-any-object">
+        <ion-button
+          (click)="showReceiver()"
+          mode="ios"
+          type="button"
+          color="secondary"
+          expand="block"
+          class="next_btn"
+          >Suivant</ion-button
+        >
+      </div>
+    </div>
+
+    <ng-template #showEmitterSection>
+      <ion-item lines="inset">
+        <ion-label position="floating">Prénom</ion-label>
+        <ion-input type="text" formControlName="receiverPrenom"></ion-input>
+      </ion-item>
+      <ion-text class="errorMsg ion-margin-start" *ngIf="depotForm.controls.receiverPrenom.touched && depotForm.controls.receiverPrenom.errors && depotForm.controls.receiverPrenom.errors.required">*Champs obligatoire</ion-text>
+      <ion-item lines="inset">
+        <ion-label position="floating">Nom</ion-label>
+        <ion-input type="text" formControlName="receiverNom"></ion-input>
+      </ion-item>
+      <ion-text class="errorMsg ion-margin-start" *ngIf="depotForm.controls.receiverNom.touched && depotForm.controls.receiverNom.errors && depotForm.controls.receiverNom.errors.required">*Champs obligatoire</ion-text>
+      <ion-item lines="inset">
+        <ion-label position="floating">Téléphone</ion-label>
+        <ion-input type="text" formControlName="receiverTelephone"></ion-input>
+      </ion-item>
+      <ion-text class="errorMsg ion-margin-start" *ngIf="depotForm.controls.receiverTelephone.touched && depotForm.controls.receiverTelephone.errors && depotForm.controls.receiverTelephone.errors.required">*Champs obligatoire</ion-text>
+      <div class="center-any-object">
+        <ion-button
+          mode="ios"
+          type="submit"
+          color="secondary"
+          expand="block"
+          class="next_btn"
+          >Déposer</ion-button
+        >
+      </div>
+    </ng-template>
+  </form>
+</ion-content>
