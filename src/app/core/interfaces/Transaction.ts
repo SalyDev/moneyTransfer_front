@@ -6,7 +6,7 @@ export interface Transaction
   type?: string;
   montant?: string;
   date_depot?: Date;
-  date_retrait?: Date;
+  date_retrait?: string;
   code?: string;
   frais?: string;
   part_agence_depot?: number;

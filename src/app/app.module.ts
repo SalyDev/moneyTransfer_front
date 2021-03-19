@@ -13,6 +13,7 @@ import { IonicStorageModule } from '@ionic/storage-angular';
 import { JwtInterceptor } from 'src/helper/jwt.interceptor';
 import { PopoverComponent } from './core/popover/popover.component';
 import { ErrorInterceptor } from 'src/helper/error.interceptor';
+import { DatePipe } from '@angular/common';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { ErrorInterceptor } from 'src/helper/error.interceptor';
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    DatePipe
   ],
   bootstrap: [AppComponent],
 })

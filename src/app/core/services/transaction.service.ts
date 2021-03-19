@@ -12,26 +12,32 @@ export class TransactionService {
   constructor(private http: HttpClient) { }
 
   // fonction pour faire une transaction
-  doTransaction(type: string, montant: string,frais: string, emetterNom: string, emetterPrenom: string, emetterCni: string, emetterTelephone: string, receiverNom: string, receiverPrenom: string, receiverTelephone: string): Observable<Transaction>{
-    let transaction: Transaction;
-    transaction = {
-      "type": type,
-      "montant": montant,
-      "frais": frais,
-      "client_depot": 
-      {
-          "nom": emetterNom,
-          "prenom": emetterPrenom,
-          "telephone": emetterTelephone,
-          "numeroCni": emetterCni
-      },
-      "client_retrait": 
-      {
-          "nom": receiverNom,
-          "prenom": receiverPrenom,
-          "telephone": receiverTelephone
-      }
-    }
+  // doTransaction(type: string, montant: string,frais: string, emetterNom: string, emetterPrenom: string, emetterCni: string, emetterTelephone: string, receiverNom: string, receiverPrenom: string, receiverTelephone: string): Observable<Transaction>{
+  //   let transaction: Transaction;
+  //   transaction = {
+  //     "type": type,
+  //     "montant": montant,
+  //     "frais": frais,
+  //     "client_depot": 
+  //     {
+  //         "nom": emetterNom,
+  //         "prenom": emetterPrenom,
+  //         "telephone": emetterTelephone,
+  //         "numeroCni": emetterCni
+  //     },
+  //     "client_retrait": 
+  //     {
+  //         "nom": receiverNom,
+  //         "prenom": receiverPrenom,
+  //         "telephone": receiverTelephone
+  //     }
+  //   }
+  //   const url = environment.apiUrl + '/transactions';
+  //   return this.http.post<Transaction>(url, transaction);
+  // }
+
+  // retrait
+  doTransaction(transaction: Transaction){
     const url = environment.apiUrl + '/transactions';
     return this.http.post<Transaction>(url, transaction);
   }

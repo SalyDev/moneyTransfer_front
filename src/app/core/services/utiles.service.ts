@@ -35,12 +35,12 @@ export class UtilesService {
   }
 
   // fonction pour un hhtp post
-  post(url:string, body: any): Observable<any>{
-    return this.http.post<any>(url, body);
-  }
+  // post(url:string, body: any): Observable<any>{
+  //   return this.http.post<any>(url, body);
+  // }
 
-  get(url:string): Observable<any[]>{
-    return this.http.get<any[]>(url);
-  }
+  // get(url:string): Observable<any[]>{
+  //   return this.http.get<any[]>(url);
+  // }
   
 }

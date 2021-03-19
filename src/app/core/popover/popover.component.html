@@ -6,6 +6,7 @@
 <ion-content>
 <ion-card class="ion-no-margin">
   <ion-card-content>
+    <div *ngIf="type=='depot'; else retraitSection">
     <div class="ion-margin-bottom">
       <p>INFOS</p>
       <div class="popoverStyle">Vous avez envoye {{montant}} à {{nom}} le {{date | date: 'd/M/yy'}}</div>
@@ -14,6 +15,10 @@
       <p>CODE DE TRANSACTION</p>
       <div class="popoverStyle">{{code}}</div>
     </div>
+  </div>
+  <ng-template #retraitSection>
+    <div>{{message}}</div>
+  </ng-template>
   </ion-card-content>
 </ion-card>
 </ion-content>
