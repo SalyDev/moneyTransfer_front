@@ -1,4 +1,3 @@
-import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
@@ -9,6 +8,7 @@ import { Client } from '../../interfaces/Client';
 import { Transaction } from '../../interfaces/Transaction';
 import { PopoverComponent } from '../../popover/popover.component';
 import { TransactionService } from '../../services/transaction.service';
+import { UtilesService } from '../../services/utiles.service';
 
 @Component({
   selector: 'app-retrait',
@@ -21,8 +21,8 @@ export class RetraitPage implements OnInit {
     private transactionService: TransactionService,
     private http: HttpClient,
     private popoverController: PopoverController,
-    private datePipe: DatePipe,
-    private router: Router
+    private router: Router,
+    private utilesService: UtilesService
   ) {}
 
   ngOnInit() {}
@@ -91,12 +91,13 @@ export class RetraitPage implements OnInit {
       this.presentPopover('Le retrait à été déjà effectue');
     } else {
       this.transaction.type = 'retrait';
+      this.transaction.client_retrait.numero_cni = this.numeroCni;
       this.transactionService.doTransaction(this.transaction).subscribe(
-        () => {
+        (data) => {
           this.presentPopover('Le retrait à été effectué avec succès');
-          this.router.navigate(["/tabs/home"]);
-        },
-        (error) => console.log(error)
+          // on reinitialise le solde du compte
+          this.utilesService.solde.next(data["user_agence_depot"]["agence"]["compte"]["solde"]);
+        }
       );
     }
   }
@@ -126,7 +127,7 @@ export class RetraitPage implements OnInit {
             nom: data[0]['client_depot']['nom'],
             prenom: data[0]['client_depot']['prenom'],
             telephone: data[0]['client_depot']['telephone'],
-            numeroCni: data[0]['client_depot']['numero_cni'],
+            numero_cni: data[0]['client_depot']['numero_cni'],
           };
           this.transaction = data[0];
         }

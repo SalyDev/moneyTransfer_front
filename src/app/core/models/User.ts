@@ -10,4 +10,5 @@ export class User{
     is_actif?: boolean;
     email?: string;
     role_user?: Role;
+    token?: any;
 }

@@ -1,18 +1,19 @@
 <app-header [name]="nom" [title]="titre"></app-header>
 <ion-content> 
-  <form class="ion-margin">
-    <!-- <div class="ion-margin-start">
-      <ion-label>
-      <p>Type de transaction</p>
-    </ion-label>
-      <div>Dépôt</div>
-    </div> -->
+  <form class="ion-margin" #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <ion-item>
+      <ion-label><p>Type de transaction</p></ion-label>
+      <ion-select interface="popover" [(ngModel)]="type" name="type">
+        <ion-select-option value="depot" selectd>Dépôt</ion-select-option>
+        <ion-select-option value="retrait">Retrait</ion-select-option>
+      </ion-select>
+    </ion-item>
     <ion-item lines="full">
       <ion-label position="floating"><p>montant</p></ion-label>
-      <ion-input type="text" required></ion-input>
+      <ion-input type="text" name="montant" required pattern="[0-9]{13}" ngModel></ion-input>
     </ion-item>
     <div class="ion-float-right">
-    <ion-button (click)="onSubmit()" mode="ios" shape="round" type="submit" color="secondary" size="small" class="login_btn">Se connecter</ion-button>
+    <ion-button  mode="ios" shape="round" type="submit" color="secondary" size="small" class="login_btn">Se connecter</ion-button>
     </div>
   </form>
 </ion-content>

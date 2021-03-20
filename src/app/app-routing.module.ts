@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './core/_helpers/auth.guard';
 
 const routes: Routes = [
   {
@@ -18,10 +19,18 @@ const routes: Routes = [
   },
   {
     path: 'depot',
+    data:{
+      'role': 'ROLE_USER'
+    },
+    canActivate: [AuthGuard],
     loadChildren: () => import('./core/pages/depot/depot.module').then( m => m.DepotPageModule)
   },
   {
     path: 'retrait',
+    data:{
+      'role': 'ROLE_USER'
+    },
+    canActivate: [AuthGuard],
     loadChildren: () => import('./core/pages/retrait/retrait.module').then( m => m.RetraitPageModule)
   },
   {

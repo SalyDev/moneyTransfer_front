@@ -4,5 +4,5 @@ export interface Client
     nom?: string;
     prenom?: string;
     telephone?: string;
-    numeroCni?: string;
+    numero_cni?: string;
 }

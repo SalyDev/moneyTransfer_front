@@ -1,13 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AlertController, ToastController } from '@ionic/angular';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UtilesService {
-
+  public solde : BehaviorSubject<string> = new BehaviorSubject('');
   constructor(private toastController: ToastController, private http: HttpClient, private alertController: AlertController) { }
 
   // fonction pour monter un toast
@@ -23,9 +23,10 @@ export class UtilesService {
     toast.present();
   }
 
-  async showAlert(message: string) {
+  async showAlert(header:string, message: string) {
     const alert = await this.alertController.create({
-      header: 'Désolé',
+      cssClass: "my-custom-class",
+      header: header,
       // subHeader: 'Subtitle for alert',
       message: message,
       buttons: ['OK']

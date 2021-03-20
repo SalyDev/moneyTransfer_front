@@ -100,11 +100,10 @@ export class DepotPage implements OnInit {
               transaction = {
                 type: 'depot',
                 montant: this.depotForm.get('montant').value,
-                frais: this.depotForm.get('frais').value,
                 client_depot: {
                   nom: this.depotForm.get('emetterNom').value,
                   prenom: this.depotForm.get('emetterPrenom').value,
-                  numeroCni: this.depotForm.get('emetterCni').value,
+                  numero_cni: this.depotForm.get('emetterCni').value,
                   telephone: this.depotForm.get('emetterTelephone').value,
                 },
                 client_retrait: {
@@ -121,7 +120,8 @@ export class DepotPage implements OnInit {
                     ' ' +
                     this.depotForm.get('receiverNom').value;
                   this.presentPopover(nom, data['date_depot'], data['code']);
-                  this.router.navigate(["/tabs/home"]);
+                  // on reinitialise le solde du compte
+                  this.utilesService.solde.next(data["user_agence_depot"]["agence"]["compte"]["solde"]);
                 });
             },
           },
@@ -136,13 +136,13 @@ export class DepotPage implements OnInit {
       emetterCni: ['', [Validators.required, Validators.pattern(/^[0-9]{13}$/)]],
       emetterNom: ['', Validators.required],
       emetterPrenom: ['', Validators.required],
-      emetterTelephone: ['', [Validators.required, Validators.pattern(/^(77|76|75|78|70)[0-9]{7}/)]],
+      emetterTelephone: ['', [Validators.required, Validators.pattern(/^(77|76|75|78|70)[0-9]{7}$/)]],
       montant: ['', [Validators.required, Validators.pattern(/^[0-9]+$/)]],
       frais: ['', [Validators.required, Validators.pattern(/^[0-9]+$/)]],
       total: ['', Validators.required],
       receiverPrenom: ['', Validators.required],
       receiverNom: ['', Validators.required],
-      receiverTelephone: ['', [Validators.required, Validators.pattern(/^(77|76|75|78|70)[0-9]{7}/)]],
+      receiverTelephone: ['', [Validators.required, Validators.pattern(/^(77|76|75|78|70)[0-9]{7}$/)]],
     });
   }
 

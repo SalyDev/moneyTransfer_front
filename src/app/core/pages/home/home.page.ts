@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { UtilesService } from '../../services/utiles.service';
 
 @Component({
   selector: 'app-home',
@@ -12,10 +13,11 @@ export class HomePage implements OnInit {
   toggleIcon: string = "eye-off";
   showMount: boolean = false;
   avatar: string = '';
-  solde: string = '';
+  count: string = '';
   currentUser: string;
   essai: string;
-  constructor(private storage: Storage, private authService: AuthService) { }
+  role:string;
+  constructor(private storage: Storage, private authService: AuthService, private utilesService: UtilesService) { }
 
   ngOnInit() {
     this.getData();
@@ -25,7 +27,15 @@ export class HomePage implements OnInit {
     this.authService.currentUser.subscribe(
       (donnee) => {
         this.avatar = donnee["avatar"];
+        this.utilesService.solde.next(donnee["solde"]);
+        this.updateSolde();
       }
+    )
+  }
+
+  updateSolde(){
+    this.utilesService.solde.subscribe(
+      (solde) => this.count = solde
     )
   }
 
@@ -37,5 +47,10 @@ export class HomePage implements OnInit {
     else{
       this.toggleIcon = "eye-off";
     }
+  }
+
+  // fonction pour la deconnexion
+  onDeconnect(){
+    this.authService.loggout();
   }
 }

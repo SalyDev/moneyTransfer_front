@@ -32,7 +32,7 @@
         <div class="style_card_1">Mon solde disponible</div>
         <div class="style_card_2">
           <span [ngClass]="{'ion-hide':!showMount}">
-            {{solde | formatNumber}} <span class="style_card_1">fcfa</span></span
+            {{count | formatNumber}} <span class="style_card_1">fcfa</span></span
           ><ion-icon
             [name]="toggleIcon"
             (click)="toggleText()"
@@ -112,7 +112,7 @@
         </ion-row>
         <ion-row>
           <ion-col>
-            <a routerLink="">
+            <a (click)="onDeconnect()">
             <ion-icon color="secondary" name="log-out"></ion-icon>
             <span class="ion-margin-start">Déconnexion</span>
             <ion-icon color="secondary" name="chevron-forward" class="ion-float-right"></ion-icon>

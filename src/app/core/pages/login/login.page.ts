@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { UtilesService } from 'src/app//core/services/utiles.service';
+import { Storage } from '@ionic/storage-angular';
+
 
 @Component({
   selector: 'app-login',
@@ -18,11 +20,14 @@ export class LoginPage implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private utilesService: UtilesService
+    private utilesService: UtilesService,
+    private storage: Storage
   ) {}
 
   ngOnInit() {
     this.initForm();
+    this.storage.create();
+    console.log(this.storage.get('token'));
   }
 
   onSubmit() {
@@ -43,8 +48,10 @@ export class LoginPage implements OnInit {
           this.loginForm.get('password').value
         )
         .subscribe(
-          () => {
+          (user) => {
+            // console.log(data);
             this.router.navigate(['/tabs/home']);
+            // this.authService.currentUserSubject.next(user);
           },
           () => {
             this.utilesService.showToast('Login ou mot de passe incorrecte.');

@@ -5,17 +5,20 @@ import { map } from 'rxjs/operators';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../models/User';
 import { Storage } from '@ionic/storage-angular';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private loginUrl = environment.apiUrl+'/login';
-  currentUser: Observable<User>;
+  currentUser: Observable<User | boolean>;
   public currentUserSubject: BehaviorSubject<User>;
 
-  constructor(private http: HttpClient, private storage: Storage) { 
-    this.currentUserSubject = new BehaviorSubject<User>(new User());
+
+  constructor(private http: HttpClient, private storage: Storage, private router: Router) {
+    // on a besoin du user connecté s'il y' a en pour l'initialiser au behavior sUbject 
+    this.currentUserSubject = new BehaviorSubject<User>(null);
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
@@ -26,12 +29,32 @@ export class AuthService {
         "telephone": telephone,
         "password": password
       }
-      ).pipe(map(user =>  {
-        this.storage.create();
-        this.storage.remove('currentUser');
-        this.storage.set('currentUser', JSON.stringify(user));
+      )
+      .pipe(map(user =>  {
+        // console.log(user);
         this.currentUserSubject.next(user);
-        return user;
+        this.storage.create();
+        this.storage.set('token', user["token"]);
+        this.storage.set('role', user["roles"]);
       }));
   }
+
+  // fonction pour la deconnexion
+  loggout(){
+    // on supprime les donnees du ionic storage
+    this.storage.remove('token');
+    this.storage.remove('role');
+
+    this.currentUserSubject.next(null);
+    this.router.navigate(['/login'])
+  }
+
+  // fonction qui permet de recuperer le role dans le ionic storage
+  // getRole(){
+  //   this.storage.get('role').then(
+  //     (roles)=>{
+  //       return roles;
+  //     }
+  //   )
+  // }
 }

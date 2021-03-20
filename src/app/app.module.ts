@@ -10,9 +10,9 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage-angular';
-import { JwtInterceptor } from 'src/helper/jwt.interceptor';
+import { JwtInterceptor } from 'src/app/core/_helpers/jwt.interceptor';
 import { PopoverComponent } from './core/popover/popover.component';
-import { ErrorInterceptor } from 'src/helper/error.interceptor';
+import { ErrorInterceptor } from 'src/app/core/_helpers/error.interceptor';
 import { DatePipe } from '@angular/common';
 
 

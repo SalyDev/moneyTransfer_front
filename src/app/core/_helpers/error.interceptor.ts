@@ -33,7 +33,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                 }
             } 
         } else {
-            this.utilesService.showAlert("Une erreur est survenue du serveur. Veuillez-réessayer plus tard");
+            this.utilesService.showAlert("Désolé", "Une erreur est survenue du serveur. Veuillez-réessayer plus tard");
         }
         return throwError(error);
       })
