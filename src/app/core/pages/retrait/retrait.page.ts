@@ -92,7 +92,9 @@ export class RetraitPage implements OnInit {
     } else {
       this.transaction.type = 'retrait';
       this.transaction.client_retrait.numero_cni = this.numeroCni;
-      this.transactionService.doTransaction(this.transaction).subscribe(
+      const url = environment.apiUrl + '/transactions';
+      this.http.post<Transaction>(url, this.transaction)
+      .subscribe(
         (data) => {
           this.presentPopover('Le retrait à été effectué avec succès');
           // on reinitialise le solde du compte

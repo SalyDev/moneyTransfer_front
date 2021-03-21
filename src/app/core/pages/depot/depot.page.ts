@@ -112,8 +112,8 @@ export class DepotPage implements OnInit {
                   telephone: this.depotForm.get('receiverTelephone').value,
                 },
               };
-              this.transactionService
-                .doTransaction(transaction)
+              const url = environment.apiUrl + '/transactions';
+              this.http.post<Transaction>(url, transaction)
                 .subscribe((data) => {
                   let nom =
                     this.depotForm.get('receiverPrenom').value +

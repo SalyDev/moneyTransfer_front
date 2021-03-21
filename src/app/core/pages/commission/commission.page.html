@@ -1,2 +1,50 @@
 <app-header [name]="nom" [title]="titre"></app-header>
-<ion-content> </ion-content>
+<ion-content>
+    <ion-grid>
+        <ion-row>
+            <ion-col size="4">
+            <ion-item>
+                <!-- <ion-label><p>Type</p></ion-label> -->
+                <ion-select interface="popover" [(ngModel)]="type" name="type">
+                  <ion-select-option value="depot">Dépôt</ion-select-option>
+                  <ion-select-option value="retrait">Retrait</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+        <ion-col size="4">
+            <ion-label>Du</ion-label>
+            <!-- <p>DU</p> -->
+            <ion-datetime [(ngModel)]="start" (ionChange)="dateChanged()" displayFormat="DD/MM/YY" value="" placeholder="Select Date"></ion-datetime>
+        </ion-col>
+        <ion-col size="4">
+            <ion-label>Au</ion-label>
+            <!-- <p>DU</p> -->
+            <ion-datetime [(ngModel)]="end" (ionChange)="dateChanged()" displayFormat="DD/MM/YY" value="" placeholder="Select Date"></ion-datetime>
+        </ion-col>
+    </ion-row>
+    </ion-grid>
+    <ion-grid>
+        <ion-row>
+            <ion-col class="center-any-object"><h6>Date</h6></ion-col>
+            <ion-col class="center-any-object"><h6>Montant</h6></ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-virtual-scroll *ngIf="type=='depot'; else retraitSection" [items]="depots" approxItemHeight="320px">
+      <ion-grid *virtualItem="let item;">
+          <ion-row>
+              <ion-col class="center-any-object">{{ item.date | date:'dd/MM/yyyy'}}</ion-col>
+              <ion-col class="center-any-object">{{ item.frais | formatNumber }}</ion-col>
+          </ion-row>
+      </ion-grid>
+    </ion-virtual-scroll>
+    <ng-template #retraitSection>
+        <ion-virtual-scroll [items]="retraits" approxItemHeight="320px">
+            <ion-grid *virtualItem="let item;">
+                <ion-row>
+                    <ion-col class="center-any-object">{{ item.date | date:'dd/MM/yyyy'}}</ion-col>
+                    <ion-col class="center-any-object">{{ item.frais | formatNumber }}</ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-virtual-scroll>
+    </ng-template>
+  </ion-content>

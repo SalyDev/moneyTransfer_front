@@ -2,12 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AlertController, ToastController } from '@ionic/angular';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { Transaction } from '../interfaces/Transaction';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UtilesService {
   public solde : BehaviorSubject<string> = new BehaviorSubject('');
+  commissionBehaviorSubject: BehaviorSubject<Transaction> = new BehaviorSubject<Transaction>(null);
   constructor(private toastController: ToastController, private http: HttpClient, private alertController: AlertController) { }
 
   // fonction pour monter un toast

@@ -8,6 +8,7 @@ import { CommissionPageRoutingModule } from './commission-routing.module';
 
 import { CommissionPage } from './commission.page';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { PipesModule } from '../../pipes/pipes.module';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     FormsModule,
     IonicModule,
     CommissionPageRoutingModule,
-    SharedModule
+    SharedModule,
+    PipesModule
   ],
   declarations: [CommissionPage]
 })

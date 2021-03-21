@@ -26,9 +26,11 @@ export class HomePage implements OnInit {
   getData(){
     this.authService.currentUser.subscribe(
       (donnee) => {
-        this.avatar = donnee["avatar"];
-        this.utilesService.solde.next(donnee["solde"]);
-        this.updateSolde();
+        if(donnee){
+          this.avatar = donnee["avatar"];
+          this.utilesService.solde.next(donnee["solde"]);
+          this.updateSolde();
+        }
       }
     )
   }

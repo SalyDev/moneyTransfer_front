@@ -29,7 +29,7 @@ const routes: Routes = [
         path: 'commission',
         canActivate: [AuthGuard],
         data:{
-          'role': 'ROLE_USER_ADMIN'
+          'role': 'ROLE_ADMIN_AGENCE'
         },
         loadChildren: () => import('../commission/commission.module').then(m => m.CommissionPageModule)
       },

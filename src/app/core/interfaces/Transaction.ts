@@ -17,4 +17,5 @@ export interface Transaction
   user_agence_rerait?: any;
   client_depot?: Client;
   client_retrait?: Client;
+  date?: Date
 }

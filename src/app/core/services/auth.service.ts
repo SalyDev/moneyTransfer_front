@@ -17,34 +17,36 @@ export class AuthService {
 
 
   constructor(private http: HttpClient, private storage: Storage, private router: Router) {
-    // on a besoin du user connecté s'il y' a en pour l'initialiser au behavior sUbject 
-    this.currentUserSubject = new BehaviorSubject<User>(null);
+    this.getCurrentUser();
+  }
+
+  async getCurrentUser(){
+    await this.storage.create();
+    const user = await this.storage.get('currentUser');
+    this.currentUserSubject = new BehaviorSubject<User>(user);
     this.currentUser = this.currentUserSubject.asObservable();
+    return this.currentUserSubject.value;
   }
 
   // fonction pour la connexion
-  getConnected(telephone: string, password: string):Observable<any>{
+   getConnected(telephone: string, password: string):Observable<any>{
     return this.http.post(this.loginUrl, 
       {
         "telephone": telephone,
         "password": password
       }
       )
-      .pipe(map(user =>  {
-        // console.log(user);
+      .pipe(map(async user => {
         this.currentUserSubject.next(user);
-        this.storage.create();
-        this.storage.set('token', user["token"]);
-        this.storage.set('role', user["roles"]);
+        await this.storage.create();
+        await this.storage.set('currentUser', user);
       }));
   }
 
   // fonction pour la deconnexion
-  loggout(){
+  async loggout(){
     // on supprime les donnees du ionic storage
-    this.storage.remove('token');
-    this.storage.remove('role');
-
+    await this.storage.clear();
     this.currentUserSubject.next(null);
     this.router.navigate(['/login'])
   }

@@ -1,44 +1,34 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { Client } from '../interfaces/Client';
 import { Transaction } from '../interfaces/Transaction';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TransactionService {
+   depots: Transaction[];
+   retraits: Transaction[];
+   
+  constructor(private http: HttpClient) { 
+    // this.depots = [];
+    this.retraits = [];
+  }
 
-  constructor(private http: HttpClient) { }
-
-  // fonction pour faire une transaction
-  // doTransaction(type: string, montant: string,frais: string, emetterNom: string, emetterPrenom: string, emetterCni: string, emetterTelephone: string, receiverNom: string, receiverPrenom: string, receiverTelephone: string): Observable<Transaction>{
-  //   let transaction: Transaction;
-  //   transaction = {
-  //     "type": type,
-  //     "montant": montant,
-  //     "frais": frais,
-  //     "client_depot": 
-  //     {
-  //         "nom": emetterNom,
-  //         "prenom": emetterPrenom,
-  //         "telephone": emetterTelephone,
-  //         "numeroCni": emetterCni
-  //     },
-  //     "client_retrait": 
-  //     {
-  //         "nom": receiverNom,
-  //         "prenom": receiverPrenom,
-  //         "telephone": receiverTelephone
-  //     }
-  //   }
+  // retrait
+  // doTransaction(transaction: Transaction){
   //   const url = environment.apiUrl + '/transactions';
   //   return this.http.post<Transaction>(url, transaction);
   // }
 
-  // retrait
-  doTransaction(transaction: Transaction){
-    const url = environment.apiUrl + '/transactions';
-    return this.http.post<Transaction>(url, transaction);
+  // fonction permettant de recuperer les commissions
+  getCommissions(): any{
+    const url = environment.apiUrl + '/agence/transactions';
+     return this.http.get(url).pipe(map(resutl => {
+        resutl["test"] = "test";
+    }));
   }
 }

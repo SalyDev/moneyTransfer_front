@@ -48,7 +48,7 @@ export class LoginPage implements OnInit {
           this.loginForm.get('password').value
         )
         .subscribe(
-          (user) => {
+          () => {
             // console.log(data);
             this.router.navigate(['/tabs/home']);
             // this.authService.currentUserSubject.next(user);
