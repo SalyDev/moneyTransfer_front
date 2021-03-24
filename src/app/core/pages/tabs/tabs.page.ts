@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UtilesService } from '../../services/utiles.service';
 
 @Component({
   selector: 'app-tabs',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TabsPage implements OnInit {
 
-  constructor() { }
+  constructor(private utilesService: UtilesService) { }
 
   ngOnInit() {
+
   }
 
 }

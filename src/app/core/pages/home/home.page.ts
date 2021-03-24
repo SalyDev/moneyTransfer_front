@@ -21,6 +21,9 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     this.getData();
+
+    // this.utilesService.commissionBehaviorSubject.next([{frais:'100'}]);
+    // console.log('hey');
   }
 
   getData(){

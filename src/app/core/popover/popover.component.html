@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title class="center-any-object">Transfert réussi</ion-title>
+    <ion-title class="center-any-object">{{title}}</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -9,7 +9,7 @@
     <div *ngIf="type=='depot'; else retraitSection">
     <div class="ion-margin-bottom">
       <p>INFOS</p>
-      <div class="popoverStyle">Vous avez envoye {{montant}} à {{nom}} le {{date | date: 'd/M/yy'}}</div>
+      <div class="popoverStyle">Vous avez envoye {{montant}} FCFA à {{nom}} le {{date | date: 'd/M/yy'}}</div>
     </div>
     <div class="ion-margin-top">
       <p>CODE DE TRANSACTION</p>

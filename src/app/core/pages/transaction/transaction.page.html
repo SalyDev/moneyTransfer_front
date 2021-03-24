@@ -20,14 +20,18 @@
   </ion-row>
   <ion-row style="margin-bottom: 0px;">
     <ion-col>
-      <ion-icon color="primary" name="repeat"></ion-icon>
-      <span>Mes transactions</span>
+      <a *ngIf="is_shownMesTransaction" (click)="showMesTransactions()" color="primary">
+        <ion-icon [ngClass]="{'active': mesTransactionSection}" name="repeat"></ion-icon>
+        <ion-text  [ngClass]="{'active': mesTransactionSection}">Mes transactions</ion-text>
+      </a>
     </ion-col>
     <ion-col>
-      <div style="width: 120%;">
-      <ion-icon color="primary" name="analytics"></ion-icon>
-      <span>Toutes les transactions</span>
-    </div>
+      <!-- <div style="width: 120%;"> -->
+      <a *ngIf="is_shownAllTransaction" (click)="showAllTransactions()" >
+        <ion-icon [ngClass]="{'active': allTransactionSection}" name="analytics"></ion-icon>
+        <ion-text [ngClass]="{'active': allTransactionSection}" >Toutes les transactions</ion-text>
+      </a>
+    <!-- </div> -->
     </ion-col>
   </ion-row>
   </ion-grid>
@@ -36,5 +40,10 @@
 
 
 <ion-content>
-
+  <div *ngIf="allTransactionSection">
+    <app-alltransactions [listItems]="listItems"></app-alltransactions>
+  </div>
+  <div *ngIf="mesTransactionSection">
+    <app-mestransactions [listItemsOfUser]="listItemsOfUser"></app-mestransactions>
+  </div>
 </ion-content>

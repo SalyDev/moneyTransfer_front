@@ -7,14 +7,18 @@ import { IonicModule } from '@ionic/angular';
 import { TransactionPageRoutingModule } from './transaction-routing.module';
 
 import { TransactionPage } from './transaction.page';
+import { MestransactionsComponent } from '../../mestransactions/mestransactions.component';
+import { AlltransactionsComponent } from '../../alltransactions/alltransactions.component';
+import { PipesModule } from '../../pipes/pipes.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    TransactionPageRoutingModule
+    TransactionPageRoutingModule,
+    PipesModule
   ],
-  declarations: [TransactionPage]
+  declarations: [TransactionPage, MestransactionsComponent, AlltransactionsComponent]
 })
 export class TransactionPageModule {}

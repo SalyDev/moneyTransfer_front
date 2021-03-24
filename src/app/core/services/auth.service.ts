@@ -6,6 +6,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../models/User';
 import { Storage } from '@ionic/storage-angular';
 import { Router } from '@angular/router';
+import { UtilesService } from './utiles.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class AuthService {
   public currentUserSubject: BehaviorSubject<User>;
 
 
-  constructor(private http: HttpClient, private storage: Storage, private router: Router) {
+  constructor(private http: HttpClient, private storage: Storage, private router: Router, private utilesService: UtilesService) {
     this.getCurrentUser();
   }
 
@@ -37,6 +38,9 @@ export class AuthService {
       }
       )
       .pipe(map(async user => {
+        if(user["roles"][0]=="ROLE_ADMIN_AGENCE"){
+          this.utilesService.getInitialTransactions("depot", 0, 10);
+        }
         this.currentUserSubject.next(user);
         await this.storage.create();
         await this.storage.set('currentUser', user);

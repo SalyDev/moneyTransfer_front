@@ -11,6 +11,7 @@ import { UtilesService } from 'src/app/core/services/utiles.service';
 import { environment } from 'src/environments/environment';
 import { Transaction } from '../../interfaces/Transaction';
 import { PopoverComponent } from '../../popover/popover.component';
+import { CommissionPage } from '../commission/commission.page';
 
 @Component({
   selector: 'app-depot',
@@ -20,6 +21,7 @@ import { PopoverComponent } from '../../popover/popover.component';
 export class DepotPage implements OnInit {
   isShowEmetter: boolean = true;
   depotForm: FormGroup;
+  listItems: Transaction[];
   constructor(
     private alertController: AlertController,
     private formBuilder: FormBuilder,
@@ -34,7 +36,7 @@ export class DepotPage implements OnInit {
     this.initForm();
   }
 
-  async presentPopover(nom: string, date: Date, code: string) {
+  async presentPopover(nom: string, date: Date, code: string, montant: number, title: string) {
     const popover = await this.popoverController.create({
       component: PopoverComponent,
       cssClass: 'my-custom-class',
@@ -43,7 +45,9 @@ export class DepotPage implements OnInit {
         nom: nom,
         date: date,
         code: code,
+        montant: montant,
         type: 'depot',
+        title: title
       },
     });
     return await popover.present();
@@ -119,9 +123,12 @@ export class DepotPage implements OnInit {
                     this.depotForm.get('receiverPrenom').value +
                     ' ' +
                     this.depotForm.get('receiverNom').value;
-                  this.presentPopover(nom, data['date_depot'], data['code']);
+                  this.presentPopover(nom, data['date_depot'], data['code'], +data['montant'], 'Transfert Réussi');
+                  // this.transactionService.getTransactions(this.listItems, "depot", 0, 8);
+
                   // on reinitialise le solde du compte
                   this.utilesService.solde.next(data["user_agence_depot"]["agence"]["compte"]["solde"]);
+                  this.utilesService.getInitialTransactions("depot", 0, 10);
                 });
             },
           },
@@ -138,7 +145,7 @@ export class DepotPage implements OnInit {
       emetterPrenom: ['', Validators.required],
       emetterTelephone: ['', [Validators.required, Validators.pattern(/^(77|76|75|78|70)[0-9]{7}$/)]],
       montant: ['', [Validators.required, Validators.pattern(/^[0-9]+$/)]],
-      frais: ['', [Validators.required, Validators.pattern(/^[0-9]+$/)]],
+      frais: ['', [Validators.required, Validators.pattern(/^\d+(\.\d+)?$/)]],
       total: ['', Validators.required],
       receiverPrenom: ['', Validators.required],
       receiverNom: ['', Validators.required],
@@ -160,16 +167,23 @@ export class DepotPage implements OnInit {
   }
 
   setTotal() {
-    if (
-      this.depotForm.get('montant').value &&
-      this.depotForm.get('frais').value
-    ) {
-      this.depotForm
+    const url: string = environment.apiUrl + "/calculator";
+    if(this.depotForm.get('montant').value){
+    const body = {
+      "type": "depot",
+      "montant": this.depotForm.get('montant').value
+    };
+    this.http.post<string>(url, body).subscribe(
+      (frais)=>{
+        this.depotForm.get('frais').setValue(+frais);
+        this.depotForm
         .get('total')
         .setValue(
           +this.depotForm.get('montant').value +
-            +this.depotForm.get('frais').value
+            +frais
         );
+      }
+    );
     }
   }
 }

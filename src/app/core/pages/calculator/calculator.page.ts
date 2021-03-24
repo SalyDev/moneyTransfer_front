@@ -21,8 +21,7 @@ export class CalculatorPage implements OnInit {
   }
 
   onSubmit(form: NgForm){
-    console.log(form.controls.montant.value);
-    console.log(this.type);
+    // console.log(this.type);
     const body = {
       "type": this.type,
       "montant": form.controls.montant.value

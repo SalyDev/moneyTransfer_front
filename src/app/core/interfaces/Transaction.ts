@@ -14,8 +14,9 @@ export interface Transaction
   part_etat?: number;
   part_systeme?: number;
   user_agence_depot?: any;
-  user_agence_rerait?: any;
+  user_agence_retrait?: any;
   client_depot?: Client;
   client_retrait?: Client;
-  date?: Date
+  date?: Date,
+  telephone_user?: string;
 }

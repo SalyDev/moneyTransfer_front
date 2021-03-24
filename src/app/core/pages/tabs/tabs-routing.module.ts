@@ -26,10 +26,19 @@ const routes: Routes = [
         loadChildren: () => import('../transaction/transaction.module').then(m => m.TransactionPageModule)
       },
       {
-        path: 'commission',
+        path: 'transaction/all',
         canActivate: [AuthGuard],
         data:{
           'role': 'ROLE_ADMIN_AGENCE'
+        },
+        loadChildren: () => import('../transaction/transaction.module').then(m => m.TransactionPageModule)
+      },
+      {
+        path: 'commission',
+        canActivate: [AuthGuard],
+        data:{
+          'role': 'ROLE_ADMIN_AGENCE',
+          'indice': 'commission'
         },
         loadChildren: () => import('../commission/commission.module').then(m => m.CommissionPageModule)
       },

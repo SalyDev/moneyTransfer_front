@@ -9,6 +9,7 @@ import {
 import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { Storage } from '@ionic/storage-angular';
+import { UtilesService } from '../services/utiles.service';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +18,8 @@ export class AuthGuard implements CanActivate {
   constructor(
     private authService: AuthService,
     private storage: Storage,
-    private router: Router
+    private router: Router,
+    private utilesService: UtilesService
   ) {}
 
   canActivate(
@@ -41,10 +43,19 @@ export class AuthGuard implements CanActivate {
       if (route.data.role && roleUser.indexOf(route.data.role) === -1) {
         console.log('contient pas');
         this.router.navigate(['tabs/home']);
+        
         return false;
       } else {
         console.log('contient');
+        // if(roleUser[0]=="ROLE_ADMIN_AGENCE"){
+          // console.log('admin');
+          // if(route.data.indice && route.data.indice=="commission"){
+          //   console.log("commission");
+          //   this.utilesService.getInitialTransactions("depot", 0, 10);
+          // }
+        // }
         return true;
+        
       }
     } else {
       this.router.navigate(['/login']);

@@ -14,12 +14,13 @@ import { JwtInterceptor } from 'src/app/core/_helpers/jwt.interceptor';
 import { PopoverComponent } from './core/popover/popover.component';
 import { ErrorInterceptor } from 'src/app/core/_helpers/error.interceptor';
 import { DatePipe } from '@angular/common';
+import { PipesModule } from './core/pipes/pipes.module';
 
 
 @NgModule({
   declarations: [AppComponent, PopoverComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, SharedModule, FormsModule, ReactiveFormsModule, HttpClientModule, IonicStorageModule.forRoot()],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, SharedModule, FormsModule, ReactiveFormsModule, HttpClientModule, IonicStorageModule.forRoot(), PipesModule],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

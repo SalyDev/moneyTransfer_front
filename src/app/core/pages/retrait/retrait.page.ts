@@ -86,22 +86,23 @@ export class RetraitPage implements OnInit {
   }
 
   onRetrait() {
-    if (this.transaction.date_retrait) {
-      console.log(this.transaction.date_retrait);
-      this.presentPopover('Le retrait à été déjà effectue');
-    } else {
+    // if (this.transaction.date_retrait) {
+    //   console.log(this.transaction.date_retrait);
+    //   this.presentPopover('Le retrait à été déjà effectue', 'Transfert échoué');
+    // } else {
       this.transaction.type = 'retrait';
       this.transaction.client_retrait.numero_cni = this.numeroCni;
       const url = environment.apiUrl + '/transactions';
       this.http.post<Transaction>(url, this.transaction)
       .subscribe(
         (data) => {
-          this.presentPopover('Le retrait à été effectué avec succès');
+          this.presentPopover('Le retrait à été effectué avec succès', 'Transfert Réussi');
           // on reinitialise le solde du compte
           this.utilesService.solde.next(data["user_agence_depot"]["agence"]["compte"]["solde"]);
+          this.router.navigate(['/tabs/home'])
         }
       );
-    }
+    // }
   }
 
   getTransactionInfos(form: NgForm) {
@@ -114,10 +115,17 @@ export class RetraitPage implements OnInit {
     this.http.get<Transaction[]>(url).subscribe(
       (data) => {
         if (data.length == 0) {
+          
           this.showTransactionDetail = false;
           this.receiver = this.emetter = { nom: '', prenom: '', telephone: '' };
           this.transaction = { montant: '', date_depot: new Date('') };
         } else {
+          // console.log(data[0].date_retrait);
+          if(data[0].date_retrait){
+            // alert("Le retrait a été déjà effectué");
+            this.presentPopover('Le retrait a été déjà effectué', 'Transfert échoué');
+            return;
+          }
           this.showTransactionDetail = true;
           this.receiver = {
             id: data[0]['client_retrait']['id'],
@@ -138,12 +146,13 @@ export class RetraitPage implements OnInit {
     );
   }
 
-  async presentPopover(message: string) {
+  async presentPopover(message: string, title: string) {
     const popover = await this.popoverController.create({
       component: PopoverComponent,
       translucent: true,
       componentProps: {
         message: message,
+        title: title
       },
     });
     return await popover.present();
